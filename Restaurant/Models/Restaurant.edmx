@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Restaurant.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RestaurantStoreContainer">
+    <EntitySet Name="MenuSet" EntityType="Restaurant.Store.MenuSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderSet" EntityType="Restaurant.Store.OrderSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TableSet" EntityType="Restaurant.Store.TableSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderItemSet" EntityType="Restaurant.Store.OrderItemSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeSet" EntityType="Restaurant.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TableOrder" Association="Restaurant.Store.TableOrder">
+      <End Role="Table" EntitySet="TableSet" />
+      <End Role="Order" EntitySet="OrderSet" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeOrder" Association="Restaurant.Store.EmployeeOrder">
+      <End Role="Employee" EntitySet="EmployeeSet" />
+      <End Role="Order" EntitySet="OrderSet" />
+    </AssociationSet>
+    <AssociationSet Name="MenuOrderItem" Association="Restaurant.Store.MenuOrderItem">
+      <End Role="Menu" EntitySet="MenuSet" />
+      <End Role="OrderItem" EntitySet="OrderItemSet" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderItem" Association="Restaurant.Store.OrderOrderItem">
+      <End Role="Order" EntitySet="OrderSet" />
+      <End Role="OrderItem" EntitySet="OrderItemSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MenuSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="position_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="wieght" Type="decimal" Nullable="false" />
+    <Property Name="price" Type="decimal" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="caloricity" Type="decimal" Nullable="false" />
+    <Property Name="category" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="table_id" Type="int" Nullable="false" />
+    <Property Name="waiter_id" Type="int" Nullable="false" />
+    <Property Name="timestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TableSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code_table" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="count_person" Type="smallint" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderItemSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="position_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="qnt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="timestamp" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tab_no" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="last_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="birth_day" Type="datetime" Nullable="false" />
+    <Property Name="position" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="TableOrder">
+    <End Role="Table" Type="Restaurant.Store.TableSet" Multiplicity="1" />
+    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="table_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeOrder">
+    <End Role="Employee" Type="Restaurant.Store.EmployeeSet" Multiplicity="1" />
+    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="waiter_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuOrderItem">
+    <End Role="Menu" Type="Restaurant.Store.MenuSet" Multiplicity="1" />
+    <End Role="OrderItem" Type="Restaurant.Store.OrderItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="position_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderItem">
+    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="1" />
+    <End Role="OrderItem" Type="Restaurant.Store.OrderItemSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Restaurant" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="RestaurantContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MenuSet" EntityType="Restaurant.Menu" />
+          <EntitySet Name="OrderSet" EntityType="Restaurant.Order" />
+          <EntitySet Name="TableSet" EntityType="Restaurant.Table" />
+          <EntitySet Name="OrderItemSet" EntityType="Restaurant.OrderItem" />
+          <EntitySet Name="EmployeeSet" EntityType="Restaurant.Employee" />
+          <AssociationSet Name="TableOrder" Association="Restaurant.TableOrder">
+            <End Role="Table" EntitySet="TableSet" />
+            <End Role="Order" EntitySet="OrderSet" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeOrder" Association="Restaurant.EmployeeOrder">
+            <End Role="Employee" EntitySet="EmployeeSet" />
+            <End Role="Order" EntitySet="OrderSet" />
+          </AssociationSet>
+          <AssociationSet Name="MenuOrderItem" Association="Restaurant.MenuOrderItem">
+            <End Role="Menu" EntitySet="MenuSet" />
+            <End Role="OrderItem" EntitySet="OrderItemSet" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOrderItem" Association="Restaurant.OrderOrderItem">
+            <End Role="Order" EntitySet="OrderSet" />
+            <End Role="OrderItem" EntitySet="OrderItemSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Menu">
+          <Documentation>
+            <Summary>Меню с перечнем позиций</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Код позиции блюда</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="position_name" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>название блюда</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="wieght" Type="Decimal" Nullable="false" >
+            <Documentation>
+              <Summary>Вес</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="price" Type="Decimal" Nullable="false" >
+            <Documentation>
+              <Summary>Цена</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="description" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Описание</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="caloricity" Type="Decimal" Nullable="false" >
+            <Documentation>
+              <Summary>Каллорийность</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="category" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Категория</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="OrderItem" Relationship="Restaurant.MenuOrderItem" FromRole="Menu" ToRole="OrderItem" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Documentation>
+            <Summary>Заказ</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_code" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Код заказа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="table_id" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>id столика</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="waiter_id" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>id официанта</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="timestamp" Type="DateTime" Nullable="false" >
+            <Documentation>
+              <Summary>временная метка открытия заказа</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Table" Relationship="Restaurant.TableOrder" FromRole="Order" ToRole="Table" />
+          <NavigationProperty Name="Employee" Relationship="Restaurant.EmployeeOrder" FromRole="Order" ToRole="Employee" />
+          <NavigationProperty Name="OrderItem" Relationship="Restaurant.OrderOrderItem" FromRole="Order" ToRole="OrderItem" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Documentation>
+            <Summary>Столики</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_table" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Код столика или порядковый номер</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="count_person" Type="Int16" Nullable="false" >
+            <Documentation>
+              <Summary>Вместительность</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="description" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Доп. инфо, описание</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Order" Relationship="Restaurant.TableOrder" FromRole="Table" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Documentation>
+            <Summary>Позиции заказа, то что заказал столик(клиент)</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" >
+            <Documentation>
+              <Summary>id заказа</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="position_id" Type="Int32" Nullable="false">
+            <Documentation>
+              <Summary>Позиция из ассортимента меню</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="qnt" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Количество</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="timestamp" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Временная метка записи в заказе</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Menu" Relationship="Restaurant.MenuOrderItem" FromRole="OrderItem" ToRole="Menu" />
+          <NavigationProperty Name="Order" Relationship="Restaurant.OrderOrderItem" FromRole="OrderItem" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Documentation>
+            <Summary>Сотрудники и официанты</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tab_no" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Табельный номер</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="name" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Имя</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="last_name" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Фамилия</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="birth_day" Type="DateTime" Nullable="false" >
+            <Documentation>
+              <Summary>День рождения</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="position" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>Должность</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="Order" Relationship="Restaurant.EmployeeOrder" FromRole="Employee" ToRole="Order" />
+        </EntityType>
+        <Association Name="TableOrder">
+          <End Type="Restaurant.Table" Role="Table" Multiplicity="1" />
+          <End Type="Restaurant.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="table_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeOrder">
+          <End Type="Restaurant.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Restaurant.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="waiter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuOrderItem">
+          <End Type="Restaurant.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="Restaurant.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderOrderItem">
+          <End Type="Restaurant.Order" Role="Order" Multiplicity="1" />
+          <End Type="Restaurant.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestaurantStoreContainer" CdmEntityContainer="RestaurantContainer">
+    <EntitySetMapping Name="MenuSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Restaurant.Menu)">
+        <MappingFragment StoreEntitySet="MenuSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="position_name" ColumnName="position_name" />
+          <ScalarProperty Name="wieght" ColumnName="wieght" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="caloricity" ColumnName="caloricity" />
+          <ScalarProperty Name="category" ColumnName="category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Restaurant.Order)">
+        <MappingFragment StoreEntitySet="OrderSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="order_code" ColumnName="order_code" />
+          <ScalarProperty Name="table_id" ColumnName="table_id" />
+          <ScalarProperty Name="waiter_id" ColumnName="waiter_id" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TableSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Restaurant.Table)">
+        <MappingFragment StoreEntitySet="TableSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="code_table" ColumnName="code_table" />
+          <ScalarProperty Name="count_person" ColumnName="count_person" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderItemSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Restaurant.OrderItem)">
+        <MappingFragment StoreEntitySet="OrderItemSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="qnt" ColumnName="qnt" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Restaurant.Employee)">
+        <MappingFragment StoreEntitySet="EmployeeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="tab_no" ColumnName="tab_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="birth_day" ColumnName="birth_day" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
