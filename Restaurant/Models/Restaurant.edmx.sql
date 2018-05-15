@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/14/2018 10:38:17
--- Generated from EDMX file: C:\Users\derachic_ai\Documents\Visual Studio 2017\Projects\Restaurant\Restaurant\Models\Restaurant.edmx
+-- Date Created: 05/15/2018 11:46:17
+-- Generated from EDMX file: E:\Work\Restaurant\Restaurant\Models\Restaurant.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,38 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_TableOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderSet] DROP CONSTRAINT [FK_TableOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmployeeOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderSet] DROP CONSTRAINT [FK_EmployeeOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MenuOrderItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderItemSet] DROP CONSTRAINT [FK_MenuOrderItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderOrderItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderItemSet] DROP CONSTRAINT [FK_OrderOrderItem];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[MenuSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MenuSet];
+GO
+IF OBJECT_ID(N'[dbo].[OrderSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderSet];
+GO
+IF OBJECT_ID(N'[dbo].[TableSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TableSet];
+GO
+IF OBJECT_ID(N'[dbo].[OrderItemSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderItemSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmployeeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmployeeSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -32,10 +59,10 @@ CREATE TABLE [dbo].[MenuSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [code] nvarchar(max)  NOT NULL,
     [position_name] nvarchar(max)  NOT NULL,
-    [wieght] decimal(18,0)  NOT NULL,
-    [price] decimal(18,0)  NOT NULL,
+    [wieght] decimal(5,3)  NOT NULL,
+    [price] decimal(5,3)  NOT NULL,
     [description] nvarchar(max)  NOT NULL,
-    [caloricity] decimal(18,0)  NOT NULL,
+    [caloricity] decimal(5,3)  NOT NULL,
     [category] nvarchar(max)  NOT NULL
 );
 GO
@@ -62,8 +89,8 @@ GO
 -- Creating table 'OrderItemSet'
 CREATE TABLE [dbo].[OrderItemSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [position_id] int  NOT NULL,
     [order_id] int  NOT NULL,
+    [position_id] int  NOT NULL,
     [qnt] nvarchar(max)  NOT NULL,
     [timestamp] nvarchar(max)  NOT NULL
 );

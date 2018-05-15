@@ -35,10 +35,10 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="position_name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="wieght" Type="decimal" Nullable="false" />
-    <Property Name="price" Type="decimal" Nullable="false" />
+    <Property Name="wieght" Type="decimal" Nullable="false" Precision="5" Scale="3" />
+    <Property Name="price" Type="decimal" Nullable="false" Precision="5" Scale="3" />
     <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="caloricity" Type="decimal" Nullable="false" />
+    <Property Name="caloricity" Type="decimal" Nullable="false" Precision="5" Scale="3" />
     <Property Name="category" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderSet">
@@ -65,8 +65,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="position_id" Type="int" Nullable="false" />
     <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="position_id" Type="int" Nullable="false" />
     <Property Name="qnt" Type="nvarchar(max)" Nullable="false" />
     <Property Name="timestamp" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -174,12 +174,12 @@
               <Summary>название блюда</Summary>
             </Documentation>
           </Property>
-          <Property Name="wieght" Type="Decimal" Nullable="false" >
+          <Property Name="wieght" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
             <Documentation>
               <Summary>Вес</Summary>
             </Documentation>
           </Property>
-          <Property Name="price" Type="Decimal" Nullable="false" >
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
             <Documentation>
               <Summary>Цена</Summary>
             </Documentation>
@@ -189,7 +189,7 @@
               <Summary>Описание</Summary>
             </Documentation>
           </Property>
-          <Property Name="caloricity" Type="Decimal" Nullable="false" >
+          <Property Name="caloricity" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
             <Documentation>
               <Summary>Каллорийность</Summary>
             </Documentation>
@@ -417,8 +417,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Restaurant.OrderItem)">
         <MappingFragment StoreEntitySet="OrderItemSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="position_id" ColumnName="position_id" />
           <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="position_id" ColumnName="position_id" />
           <ScalarProperty Name="qnt" ColumnName="qnt" />
           <ScalarProperty Name="timestamp" ColumnName="timestamp" />
         </MappingFragment>
