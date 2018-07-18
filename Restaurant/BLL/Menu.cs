@@ -7,27 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.Models
+namespace Restaurant.BLL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Menu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Menu()
         {
             this.OrderItem = new HashSet<OrderItem>();
         }
     
         public int Id { get; set; }
-        public string order_code { get; set; }
-        public int table_id { get; set; }
-        public int waiter_id { get; set; }
-        public System.DateTime timestamp { get; set; }
+        public string code { get; set; }
+        public string position_name { get; set; }
+        public decimal wieght { get; set; }
+        public decimal price { get; set; }
+        public string description { get; set; }
+        public decimal caloricity { get; set; }
+        public string category { get; set; }
     
-        public virtual Table Table { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItem { get; set; }
     }

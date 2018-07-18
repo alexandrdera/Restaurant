@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.Models
+namespace Restaurant.BLL
 {
     using System;
     using System.Data.Entity;

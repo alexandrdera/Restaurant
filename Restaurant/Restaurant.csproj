@@ -154,34 +154,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
+    <Compile Include="BLL\Employee.cs">
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Menu.cs">
+    <Compile Include="BLL\Menu.cs">
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order.cs">
+    <Compile Include="BLL\Order.cs">
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderItem.cs">
+    <Compile Include="BLL\OrderItem.cs">
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restaurant.Context.cs">
+    <Compile Include="BLL\Restaurant.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Restaurant.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restaurant.cs">
+    <Compile Include="BLL\Restaurant.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restaurant.Designer.cs">
+    <Compile Include="BLL\Restaurant.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Restaurant.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Table.cs">
+    <Compile Include="BLL\Table.cs">
       <DependentUpon>Restaurant.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,13 +197,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Restaurant.Context.tt">
+    <Content Include="BLL\Restaurant.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Restaurant.Context.cs</LastGenOutput>
       <DependentUpon>Restaurant.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Restaurant.edmx.sql" />
-    <Content Include="Models\Restaurant.tt">
+    <Content Include="BLL\Restaurant.edmx.sql" />
+    <Content Include="BLL\Restaurant.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Restaurant.cs</LastGenOutput>
       <DependentUpon>Restaurant.edmx</DependentUpon>
@@ -213,11 +213,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Restaurant.edmx">
+    <EntityDeploy Include="BLL\Restaurant.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Restaurant.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Restaurant.edmx.diagram">
+    <Content Include="BLL\Restaurant.edmx.diagram">
       <DependentUpon>Restaurant.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -246,7 +246,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
