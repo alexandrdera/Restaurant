@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.BLL
+namespace Restaurant._BLL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Table
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Table()
         {
             this.Order = new HashSet<Order>();
         }
     
         public int Id { get; set; }
-        public string tab_no { get; set; }
-        public string name { get; set; }
-        public string last_name { get; set; }
-        public System.DateTime birth_day { get; set; }
-        public string position { get; set; }
+        public string code_table { get; set; }
+        public short count_person { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.BLL
+namespace Restaurant._BLL
 {
     using System;
     using System.Collections.Generic;
