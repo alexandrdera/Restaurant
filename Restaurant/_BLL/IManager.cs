@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Restaurant._BLL
 {
-	public interface IManager
+	public interface IManager : IDisposable
 	{
+		#region Managers Core
+		IManager Menu { get; set; }
+		#endregion
 	}
 }

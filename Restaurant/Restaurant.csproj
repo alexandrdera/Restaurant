@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="_BLL\Core\MenuManager.cs" />
     <Compile Include="_BLL\IManager.cs" />
     <Compile Include="_BLL\Manager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="_BLL\Core\I\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
