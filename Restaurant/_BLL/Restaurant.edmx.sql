@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/15/2018 11:46:17
--- Generated from EDMX file: E:\Work\Restaurant\Restaurant\Models\Restaurant.edmx
+-- Date Created: 08/01/2018 10:32:12
+-- Generated from EDMX file: D:\Work\RudenSoft\Тестирование\Restaurant\Restaurant\_BLL\Restaurant.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [restaurantdb];
+--USE [RESTAURANT];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO

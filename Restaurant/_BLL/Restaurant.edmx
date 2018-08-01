@@ -4,132 +4,132 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Restaurant.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="RestaurantStoreContainer">
-    <EntitySet Name="MenuSet" EntityType="Restaurant.Store.MenuSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderSet" EntityType="Restaurant.Store.OrderSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="TableSet" EntityType="Restaurant.Store.TableSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderItemSet" EntityType="Restaurant.Store.OrderItemSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EmployeeSet" EntityType="Restaurant.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="TableOrder" Association="Restaurant.Store.TableOrder">
-      <End Role="Table" EntitySet="TableSet" />
-      <End Role="Order" EntitySet="OrderSet" />
-    </AssociationSet>
-    <AssociationSet Name="EmployeeOrder" Association="Restaurant.Store.EmployeeOrder">
-      <End Role="Employee" EntitySet="EmployeeSet" />
-      <End Role="Order" EntitySet="OrderSet" />
-    </AssociationSet>
-    <AssociationSet Name="MenuOrderItem" Association="Restaurant.Store.MenuOrderItem">
-      <End Role="Menu" EntitySet="MenuSet" />
-      <End Role="OrderItem" EntitySet="OrderItemSet" />
-    </AssociationSet>
-    <AssociationSet Name="OrderOrderItem" Association="Restaurant.Store.OrderOrderItem">
-      <End Role="Order" EntitySet="OrderSet" />
-      <End Role="OrderItem" EntitySet="OrderItemSet" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="MenuSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="position_name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="wieght" Type="decimal" Nullable="false" Precision="5" Scale="3" />
-    <Property Name="price" Type="decimal" Nullable="false" Precision="5" Scale="3" />
-    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="caloricity" Type="decimal" Nullable="false" Precision="5" Scale="3" />
-    <Property Name="category" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrderSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="order_code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="table_id" Type="int" Nullable="false" />
-    <Property Name="waiter_id" Type="int" Nullable="false" />
-    <Property Name="timestamp" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TableSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="code_table" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="count_person" Type="smallint" Nullable="false" />
-    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrderItemSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="order_id" Type="int" Nullable="false" />
-    <Property Name="position_id" Type="int" Nullable="false" />
-    <Property Name="qnt" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="timestamp" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EmployeeSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tab_no" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="last_name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="birth_day" Type="datetime" Nullable="false" />
-    <Property Name="position" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <Association Name="TableOrder">
-    <End Role="Table" Type="Restaurant.Store.TableSet" Multiplicity="1" />
-    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Table">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="table_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EmployeeOrder">
-    <End Role="Employee" Type="Restaurant.Store.EmployeeSet" Multiplicity="1" />
-    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="waiter_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MenuOrderItem">
-    <End Role="Menu" Type="Restaurant.Store.MenuSet" Multiplicity="1" />
-    <End Role="OrderItem" Type="Restaurant.Store.OrderItemSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menu">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderItem">
-        <PropertyRef Name="position_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OrderOrderItem">
-    <End Role="Order" Type="Restaurant.Store.OrderSet" Multiplicity="1" />
-    <End Role="OrderItem" Type="Restaurant.Store.OrderItemSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderItem">
-        <PropertyRef Name="order_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="Restaurant.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EmployeeSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tab_no" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="birth_day" Type="datetime" Nullable="false" />
+          <Property Name="position" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="position_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="wieght" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="caloricity" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+          <Property Name="category" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderItemSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="position_id" Type="int" Nullable="false" />
+          <Property Name="qnt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="timestamp" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="table_id" Type="int" Nullable="false" />
+          <Property Name="waiter_id" Type="int" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_table" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="count_person" Type="smallint" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmployeeOrder">
+          <End Role="EmployeeSet" Type="Self.EmployeeSet" Multiplicity="1" />
+          <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderSet">
+              <PropertyRef Name="waiter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuOrderItem">
+          <End Role="MenuSet" Type="Self.MenuSet" Multiplicity="1" />
+          <End Role="OrderItemSet" Type="Self.OrderItemSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItemSet">
+              <PropertyRef Name="position_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderOrderItem">
+          <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="1" />
+          <End Role="OrderItemSet" Type="Self.OrderItemSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItemSet">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableOrder">
+          <End Role="TableSet" Type="Self.TableSet" Multiplicity="1" />
+          <End Role="OrderSet" Type="Self.OrderSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderSet">
+              <PropertyRef Name="table_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantStoreContainer">
+          <EntitySet Name="EmployeeSet" EntityType="Self.EmployeeSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuSet" EntityType="Self.MenuSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItemSet" EntityType="Self.OrderItemSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderSet" EntityType="Self.OrderSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableSet" EntityType="Self.TableSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeOrder" Association="Self.FK_EmployeeOrder">
+            <End Role="EmployeeSet" EntitySet="EmployeeSet" />
+            <End Role="OrderSet" EntitySet="OrderSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuOrderItem" Association="Self.FK_MenuOrderItem">
+            <End Role="MenuSet" EntitySet="MenuSet" />
+            <End Role="OrderItemSet" EntitySet="OrderItemSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderOrderItem" Association="Self.FK_OrderOrderItem">
+            <End Role="OrderSet" EntitySet="OrderSet" />
+            <End Role="OrderItemSet" EntitySet="OrderItemSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableOrder" Association="Self.FK_TableOrder">
+            <End Role="TableSet" EntitySet="TableSet" />
+            <End Role="OrderSet" EntitySet="OrderSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Restaurant" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -164,37 +164,37 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code" Type="String" Nullable="false" >
+          <Property Name="code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Код позиции блюда</Summary>
             </Documentation>
           </Property>
-          <Property Name="position_name" Type="String" Nullable="false" >
+          <Property Name="position_name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>название блюда</Summary>
             </Documentation>
           </Property>
-          <Property Name="wieght" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
+          <Property Name="wieght" Type="Decimal" Nullable="false" >
             <Documentation>
               <Summary>Вес</Summary>
             </Documentation>
           </Property>
-          <Property Name="price" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
+          <Property Name="price" Type="Decimal" Nullable="false" >
             <Documentation>
               <Summary>Цена</Summary>
             </Documentation>
           </Property>
-          <Property Name="description" Type="String" Nullable="false" >
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Описание</Summary>
             </Documentation>
           </Property>
-          <Property Name="caloricity" Type="Decimal" Nullable="false" Precision="5" Scale="3" >
+          <Property Name="caloricity" Type="Decimal" Nullable="false" >
             <Documentation>
               <Summary>Каллорийность</Summary>
             </Documentation>
           </Property>
-          <Property Name="category" Type="String" Nullable="false" >
+          <Property Name="category" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Категория</Summary>
             </Documentation>
@@ -209,7 +209,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_code" Type="String" Nullable="false" >
+          <Property Name="order_code" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Код заказа</Summary>
             </Documentation>
@@ -224,7 +224,7 @@
               <Summary>id официанта</Summary>
             </Documentation>
           </Property>
-          <Property Name="timestamp" Type="DateTime" Nullable="false" >
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" >
             <Documentation>
               <Summary>временная метка открытия заказа</Summary>
             </Documentation>
@@ -241,7 +241,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code_table" Type="String" Nullable="false" >
+          <Property Name="code_table" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Код столика или порядковый номер</Summary>
             </Documentation>
@@ -251,7 +251,7 @@
               <Summary>Вместительность</Summary>
             </Documentation>
           </Property>
-          <Property Name="description" Type="String" Nullable="false" >
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Доп. инфо, описание</Summary>
             </Documentation>
@@ -276,12 +276,12 @@
               <Summary>Позиция из ассортимента меню</Summary>
             </Documentation>
           </Property>
-          <Property Name="qnt" Type="String" Nullable="false" >
+          <Property Name="qnt" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Количество</Summary>
             </Documentation>
           </Property>
-          <Property Name="timestamp" Type="String" Nullable="false" >
+          <Property Name="timestamp" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Временная метка записи в заказе</Summary>
             </Documentation>
@@ -297,27 +297,27 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tab_no" Type="String" Nullable="false" >
+          <Property Name="tab_no" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Табельный номер</Summary>
             </Documentation>
           </Property>
-          <Property Name="name" Type="String" Nullable="false" >
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Имя</Summary>
             </Documentation>
           </Property>
-          <Property Name="last_name" Type="String" Nullable="false" >
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Фамилия</Summary>
             </Documentation>
           </Property>
-          <Property Name="birth_day" Type="DateTime" Nullable="false" >
+          <Property Name="birth_day" Type="DateTime" Nullable="false" Precision="3" >
             <Documentation>
               <Summary>День рождения</Summary>
             </Documentation>
           </Property>
-          <Property Name="position" Type="String" Nullable="false" >
+          <Property Name="position" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" >
             <Documentation>
               <Summary>Должность</Summary>
             </Documentation>
@@ -452,6 +452,7 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
